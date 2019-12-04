@@ -1,8 +1,8 @@
 //
 // Created by liuping on 2019/3/11.
 //
-#include "test_base.h"
-#include "common/array_wrapper.h"
+#include "test_base.hpp"
+#include "common/array_wrapper.hpp"
 #include <algorithm>
 
 using namespace array;

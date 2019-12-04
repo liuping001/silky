@@ -2,8 +2,8 @@
 // Created by liuping on 2019/4/2.
 //
 #include <string>
-#include "test_base.h"
-#include "common/scope_guard.h"
+#include "test_base.hpp"
+#include "common/scope_guard.hpp"
 
 int func(int i) {
     WARN << "normal func " << i;

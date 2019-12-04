@@ -2,8 +2,8 @@
 // Created by liuping on 2019/3/27.
 //
 
-#include "common/define.h"
-#include "test_base.h"
+#include "common/define.hpp"
+#include "test_base.hpp"
 
 TEST_F(scope) {
     int i = 0;
