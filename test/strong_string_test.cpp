@@ -3,7 +3,7 @@
 //
 
 #include "test_base.hpp"
-#include "common/shrong_string.hpp"
+#include "common/strong_string.hpp"
 
 TEST_F(split_ip) {
   auto ret = sstr::split("192.168.0.1", "\\.");
