@@ -13,22 +13,24 @@
 
 class Timer {
  public:
-  using TimeOutTask = std::function<bool ()>; // 返回值表示是否继续加入定时器
+  using TimeOutTask = std::function<void ()>; // 返回值表示是否继续加入定时器
   struct TimeInfo {
     TimeInfo(TimeOutTask t) : task(std::move(t)){}
     TimeOutTask task;
     uint32_t interval = 0;
     uint32_t seq = 0;
+    bool repeat = false;
   };
   using TimerId = std::pair<TimeInfo*, uint32_t>;
   using TimerNode = std::pair<time_t, std::shared_ptr<TimeInfo>>;
   ~Timer() {
     Clear();
   }
-  TimerId AddTimer(time_t now, time_t interval, TimeOutTask &&task) {
+  TimerId AddTimer(time_t now, time_t interval, TimeOutTask &&task, bool repeat = false) {
     auto t = std::make_shared<TimeInfo>(std::move(task));
     t->interval = interval;
     t->seq = now / 1000;
+    t->repeat = repeat;
     auto ret = timer_set_.emplace(now + interval, t);
     return TimerId(t.get(), t->seq);
   }
@@ -50,8 +52,8 @@ class Timer {
           continue;
         }
       }
-      auto b = item.second->task();
-      if (b) {
+      item.second->task();
+      if (item.second->repeat) {
         timer_set_.emplace(now_ms + item.second->interval, item.second);
       }
     }
