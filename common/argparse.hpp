@@ -72,9 +72,6 @@ class ArgumentParser {
   }
 
   void ParseArgs() {
-    if (argc_ < 2) {
-      return;
-    }
     std::string all_args;
     for (int i = 1; i < argc_; i++) {
       all_args.append(" ");
